@@ -1,0 +1,37 @@
+extends layouts/index
+
+block content 
+    div.container.p-5
+        h1.text-center.mb-5.text-uppercase.text-muted NodeJS Login and Registration System
+        div.row
+            div.col-sm-5.bg-light.rounded.py-3
+                h2.text-center LOGIN
+                form(action="" method="POST")
+                    div.form-group.mt-2
+                        label(for="_email") Email
+                        input(type="text" name="user_email" id="_email" placeholder="Email" required).form-control
+                    div.form-group.mt-2
+                        label(for="_pass") Email
+                        input(type="password" name="user_pass" id="_pass" placeholder="Password" required).form-control
+                    if (login_errors)
+                        - for(i = 0; i < login_errors.length; i++){
+                            div(role="alert").alert.alert-danger.mt-1 #{login_errors[i]}   
+                        - }
+                    button(type="submit").mt-2.btn.btn-primary Login
+            div.col-sm-6.bg-light.rounded.border.py-3.offset-sm-1
+                h2.text-center REGISTER
+                form(action="/register" method="POST" novalidate)
+                    div.form-group.mt-2
+                        label(for="_name") Name
+                        input(type="text" name="user_name" id="_rname" value=old_data?old_data.user_name:'' placeholder="Name" required).form-control.mt-2
+                    div.form-group.mt-2
+                        label(for="_email") Email
+                        input(type="email" name="user_email" id="_remail" value=old_data?old_data.user_email:'' placeholder="Email" required).form-control.mt-2
+                    div.form-group.mt-2
+                        label(for="_pass") Password
+                        input(type="password" name="user_pass" id="_rpass" value=old_data?old_data.user_pass:'' placeholder="Password" required).form-control.mt-2
+                    if (register_err)
+                        - for (i = 0; i < register_err.length; i++){
+                            div(role="alert").alert.alert-danger.mt-1 #{register_err[i]}    
+                        - }
+                    button(type="submit").mt-2.btn.btn-success Sign Up  
